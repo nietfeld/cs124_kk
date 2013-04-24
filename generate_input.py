@@ -5,17 +5,16 @@
 ""													   ""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-from utils import *
+import random
 
-def karmarkar_karp (list):
-	while len(list) > 1:
-		distance = abs(list[0] - list[1])
-		del list[:2]
-		reverse_insort(list, distance)
-	print list
+def generate_nums ():
+	random.seed()
+	file = open("input.txt", "w")
+	for i in range(100):
+		file.write(str(random.getrandbits(64)) + "\n")
 
 def main ():
-	karmarkar_karp(readInput("input.txt"))
+	generate_nums()
 
 if __name__ == "__main__":
 	main()

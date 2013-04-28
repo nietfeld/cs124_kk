@@ -23,16 +23,19 @@ def hill_climbing (list):
 	for all in range(max_iter):
 		[i, j] = random.sample(range(len(list)),2) # pick 2 different indices
 		x = random.randrange(-1, 2, 2)
-		solution[i] = solution[i] * -1 			   # flip the sign
-		solution[j] = solution[j] * x #flip the sign with p = 1/2
-		new_residual = sum(solution)
-		if abs(new_residual) < abs(residual): 
-			residual = new_residual
-		else: 
-			solution[i] = solution[i] * -1 
-			solution[j] = solution[j] * x
+		if (x = -1): 
+			new_residual = (residual - (solution[i]+solution[j])*2) # flip the sign
+			if abs(new_residual) < abs(residual): 
+				residual = new_residual
+				solution[i] *= -1
+				solution[j] *= -1 
+		if (x = 1): 
+			new_residual = (residual - solution[i]*2) # flip the sign
+			if abs(new_residual) < abs(residual): 
+				residual = new_residual
+				solution[i] *= -1
 	print "hill_climbing:"
-	print residual
+	print abs(residual)
 
 def repeated_random (list): 
 	solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
@@ -46,7 +49,7 @@ def repeated_random (list):
 			residual = new_residual
 		print residual
 	print "repeated_random"
-	print residual
+	print abs(residual)
 
 
 def main ():

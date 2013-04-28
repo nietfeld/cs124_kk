@@ -12,9 +12,3 @@ def generate_nums ():
 	file = open("input.txt", "w")
 	for i in range(100):
 		file.write(str(random.getrandbits(64)) + "\n")
-
-def main ():
-	generate_nums()
-
-if __name__ == "__main__":
-	main()

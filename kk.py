@@ -6,17 +6,28 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 from utils import *
-import random
-max_iter = 25
+from generate_input import *
+max_iter = 25000
 
-def karmarkar_karp (list):
+def karmarkar_karp(list):
 	while len(list) > 1:
 		distance = abs(list[0] - list[1])
 		del list[:2]
 		reverse_insort(list, distance)
-	print list
+	print "Karmarkar-Karp: " + str(list[0])
 
-def hill_climbing (list):
+def repeated_random(list):
+	solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
+	residual = sum(solution)
+	for x in range(max_iter):
+		new_solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
+		new_residual = sum(new_solution)
+		if abs(new_residual) < abs(residual): 
+			solution = new_solution
+			residual = new_residual
+	print "Repeated random: " + str(abs(residual))
+
+def hill_climbing(list):
 	# need to check on how this works.... 
 	solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
 	residual = sum(solution)
@@ -34,25 +45,19 @@ def hill_climbing (list):
 	print "hill_climbing:"
 	print residual
 
-def repeated_random (list): 
-	solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
-	residual = sum(solution)
-	print residual
-	for x in range(max_iter):
-		new_solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
-		new_residual = sum(new_solution)
-		if abs(new_residual) < abs(residual): 
-			solution = new_solution
-			residual = new_residual
-		print residual
-	print "repeated_random"
-	print residual
+def annealing(list):
+	print "hi"
 
 
-def main ():
-	karmarkar_karp(readInput("input.txt"))
-	repeated_random(readInput("input.txt"))
-	hill_climbing(readInput("input.txt"))
+
+
+def main():
+	generate_nums()
+	input = readInput("input.txt")
+	karmarkar_karp(input)
+	repeated_random(input)
+	hill_climbing(input)
+
 
 if __name__ == "__main__":
 	main()

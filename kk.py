@@ -16,16 +16,19 @@ def karmarkar_karp(list):
 		reverse_insort(list, distance)
 	print "Karmarkar-Karp: " + str(list[0])
 
-def repeated_random(list):
+def repeated_random (list): 
 	solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
 	residual = sum(solution)
+	print residual
 	for x in range(max_iter):
 		new_solution = map(lambda x: x * random.randrange(-1, 2, 2), list)
 		new_residual = sum(new_solution)
 		if abs(new_residual) < abs(residual): 
 			solution = new_solution
 			residual = new_residual
-	print "Repeated random: " + str(abs(residual))
+		print residual
+	print "repeated_random"
+	print abs(residual)
 
 def hill_climbing(list):
 	# need to check on how this works.... 
@@ -34,22 +37,22 @@ def hill_climbing(list):
 	for all in range(max_iter):
 		[i, j] = random.sample(range(len(list)),2) # pick 2 different indices
 		x = random.randrange(-1, 2, 2)
-		solution[i] = solution[i] * -1 			   # flip the sign
-		solution[j] = solution[j] * x #flip the sign with p = 1/2
-		new_residual = sum(solution)
-		if abs(new_residual) < abs(residual): 
-			residual = new_residual
-		else: 
-			solution[i] = solution[i] * -1 
-			solution[j] = solution[j] * x
+		if (x = -1): 
+			new_residual = (residual - (solution[i]+solution[j])*2) # flip the sign
+			if abs(new_residual) < abs(residual): 
+				residual = new_residual
+				solution[i] *= -1
+				solution[j] *= -1 
+		if (x = 1): 
+			new_residual = (residual - solution[i]*2) # flip the sign
+			if abs(new_residual) < abs(residual): 
+				residual = new_residual
+				solution[i] *= -1
 	print "hill_climbing:"
-	print residual
+	print abs(residual)
 
 def annealing(list):
 	print "hi"
-
-
-
 
 def main():
 	generate_nums()
